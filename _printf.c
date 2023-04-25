@@ -1,5 +1,7 @@
 #include "main.h"
 
+void print_buffer(char buffer[], int *buff);
+
 /**
  * _printf - my own printf function
  * @format: format specifier
@@ -31,10 +33,11 @@ int _printf(const char *format, ...)
 		{
 			print_buffer(buffer, &buff);
 			flags = get_flags(format, &i);
-			width = get_width(format, &i, ap);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &i, list);
 			size = get_size(format, &i);
 			++i;
-			printed = handle_print(format, &i, ap,
+			printed = handle_print(format, &i, list,
 					buffer, flags, width,
 					precision, size);
 			if (printed == -1)
@@ -45,7 +48,7 @@ int _printf(const char *format, ...)
 
 	print_buffer(buffer, &buff);
 
-	va_end(ap);
+	va_end(list);
 
 	return (char_printed);
 }
@@ -59,7 +62,7 @@ int _printf(const char *format, ...)
  */
 void print_buffer(char buffer[], int *buff)
 {
-	if (buff > 0)
+	if (*buff > 0)
 		write(1, &buffer[0], *buff);
 
 	*buff = 0;
