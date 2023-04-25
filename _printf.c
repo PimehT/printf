@@ -9,14 +9,14 @@
 int _printf(const char *format, ...)
 {
 	int i, printed = 0, char_printed = 0;
-	int width, size, precision, flag, buff = 0;
-	va_list ap;
+	int width, size, precision, flags, buff = 0;
+	va_list list;
 	char buffer[BUFF_SIZE];
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(ap, format);
+	va_start(list, format);
 
 	for (i = 0; format && format[i] != '\0'; i++)
 	{
@@ -30,12 +30,12 @@ int _printf(const char *format, ...)
 		else
 		{
 			print_buffer(buffer, &buff);
-			flag = get_flags(format, &i);
+			flags = get_flags(format, &i);
 			width = get_width(format, &i, ap);
 			size = get_size(format, &i);
 			++i;
 			printed = handle_print(format, &i, ap,
-					buffer, flag, width,
+					buffer, flags, width,
 					precision, size);
 			if (printed == -1)
 				return (-1);
@@ -47,14 +47,14 @@ int _printf(const char *format, ...)
 
 	va_end(ap);
 
-	return(char_printed);
+	return (char_printed);
 }
 
 /**
  * print_buffer - function to print buffer content
  * @buffer: char array
  * @buff: index of the next char, also represents length
- * 
+ *
  * Return: nothing
  */
 void print_buffer(char buffer[], int *buff)
