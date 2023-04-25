@@ -1,4 +1,10 @@
-printf project collaboration
+#**PRINTF PROJECT COLLABORATION**
+#***Author: PimehT***
+#***Collaborator: MauricespazzoZeRo***
+
+This repository contains files on printf, made by the above authors.
+
+This is a C program that defines a custom implementation of the printf function, called _printf. It includes several format specifiers that allow printing of different types of data, including characters, strings, integers, and binary, octal, and hexadecimal numbers.
 
 function_3.c
 
