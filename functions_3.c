@@ -25,7 +25,9 @@ int print_pointer(va_list types, char buffer[],
 	UNUSED(size);
 
 	if (addrs == NULL)
+	{
 		return (write(1, "(nil)", 5));
+	}
 
 	buffer[BUFF_SIZE - 1] = '\0';
 	UNUSED(precision);
@@ -40,11 +42,17 @@ int print_pointer(va_list types, char buffer[],
 	}
 
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
+	{
 		padd = '0';
+	}
 	if (flags & F_PLUS)
+	{
 		extra_c = '+', length++;
+	}
 	else if (flags & F_SPACE)
+	{
 		extra_c = ' ', length++;
+	}
 
 	ind++;
 
@@ -76,14 +84,20 @@ int print_non_printable(va_list types, char buffer[],
 	UNUSED(size);
 
 	if (str == NULL)
+	{
 		return (write(1, "(null)", 6));
+	}
 
 	while (str[i] != '\0')
 	{
 		if (is_printable(str[i]))
+		{
 			buffer[i + offset] = str[i];
+		}
 		else
+		{
 			offset += append_hexa_code(str[i], buffer, i + offset);
+		}
 
 		i++;
 	}
@@ -165,7 +179,9 @@ int print_rot13string(va_list types, char buffer[],
 	UNUSED(size);
 
 	if (str == NULL)
+	{
 		str = "(AHYY)";
+	}
 	for (i = 0; str[i]; i++)
 	{
 		for (j = 0; in[j]; j++)
