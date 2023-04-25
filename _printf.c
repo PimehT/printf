@@ -4,9 +4,10 @@ void print_buffer(char buffer[], int *buff);
 
 /**
  * _printf - my own printf function
- * @format: format specifier
  *
- * Return: strings like actual printf
+ * @format: Specifier for different formats
+ *
+ * Return: strings like the original printf function
  */
 int _printf(const char *format, ...)
 {
@@ -16,7 +17,9 @@ int _printf(const char *format, ...)
 	char buffer[BUFF_SIZE];
 
 	if (format == NULL)
+	{
 		return (-1);
+	}
 
 	va_start(list, format);
 
@@ -26,7 +29,9 @@ int _printf(const char *format, ...)
 		{
 			buffer[buff++] = format[i];
 			if (buff == BUFF_SIZE)
+			{
 				print_buffer(buffer, &buff);
+			}
 			char_printed++;
 		}
 		else
@@ -41,7 +46,9 @@ int _printf(const char *format, ...)
 					buffer, flags, width,
 					precision, size);
 			if (printed == -1)
+			{
 				return (-1);
+			}
 			char_printed += printed;
 		}
 	}
@@ -63,7 +70,9 @@ int _printf(const char *format, ...)
 void print_buffer(char buffer[], int *buff)
 {
 	if (*buff > 0)
+	{
 		write(1, &buffer[0], *buff);
+	}
 
 	*buff = 0;
 }
